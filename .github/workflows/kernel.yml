@@ -1,0 +1,22 @@
+name: KernelBuilder
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: nexgang/ubuntu:latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build Kernel
+        env:
+          TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          git clone --depth=1 -b rebase https://1xtAsh:${TOKEN}@github.com/1xtAsh/kernel-xiaomi-sm8350.git kernel
+          mv build-kernel.sh kernel/
+          cd kernel
+          bash build-kernel.sh
