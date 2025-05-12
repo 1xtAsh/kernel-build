@@ -10,6 +10,7 @@ KERVER=$(make kernelversion)
 VERSION=v1
 DEFCONFIG="haydn_defconfig"
 IMAGE=${KERNEL_DIR}/out/arch/arm64/boot/Image
+DTBO=${KERNEL_DIR}/out/arch/arm64/boot/dtbo.img
 DTB=${KERNEL_DIR}/out/arch/arm64/boot/dts/vendor/qcom/lahaina.dtb
 ZIPNAME="FarFromStock"
 TANGGAL=$(date +"%F%S")
@@ -80,6 +81,7 @@ function zipping() {
     else
         mv "$IMAGE" AnyKernel3
         mv "$DTB" AnyKernel3/dtb
+	mv "$DTBO" AnyKernel3
         cd AnyKernel3 || exit 1
         zip -r9 "${FINAL_ZIP}" * -x .git README.md
         cd "$KERNEL_DIR" || exit 1
