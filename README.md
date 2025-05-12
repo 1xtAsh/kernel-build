@@ -1,1 +1,1 @@
-# kernel-msm-5.4-RTR
+# kernel-build
